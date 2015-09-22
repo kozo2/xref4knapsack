@@ -1,0 +1,10 @@
+install.packages("devtools")
+library(devtools)
+install_github("kozo2/linkdbRDF")
+library(linkdbRDF)
+
+foo <- getLinks("knapsack", "compound")
+foo1 <- as.data.frame(sapply(foo, gsub, pattern = "knapsack:", replacement = ""))
+foo2 <- as.data.frame(sapply(foo1, gsub, pattern = "cpd:", replacement = ""))
+names(foo2) <- c("knapsack", "kegg")
+write.csv(foo2, file"knapsack2kegg.csv", row.names = F)
